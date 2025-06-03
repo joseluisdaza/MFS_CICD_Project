@@ -38,8 +38,22 @@ pipeline {
         }
         stage('Test AdminSolution') {
             steps {
-                dir("${env.SOLUTION_DIR}/AdminSolution.Test") {
-                    bat 'dotnet test'
+                dir("${env.SOLUTION_DIR}/AdminSolution.Tests") {
+                    bat 'dotnet test --no-build --verbosity normal'
+                }
+            }
+        }
+        stage('Test MainSolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}/MainSolution.Tests") {
+                    bat 'dotnet test --no-build --verbosity normal'
+                }
+            }
+        }
+        stage('Test AdminSolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}/AdminSolution.Tests") {
+                    bat 'dotnet test --no-build --verbosity normal'
                 }
             }
         }
