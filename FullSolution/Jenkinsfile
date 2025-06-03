@@ -2,6 +2,15 @@
 pipeline {
     agent any
 
+    options {
+        // Timeout after 10 minutes
+        timeout(time: 10, unit: 'MINUTES')
+        // Disable concurrent builds
+        disableConcurrentBuilds()
+        // Adding color to console output
+        ansiColor('xterm')
+    }
+
     environment {
         SOLUTION_DIR = 'FullSolution'
         OUTPUT_DIR = "\\\\localhost\\Cursos\\Maestria Fullstack\\04 CI CD\\Builds\\${BUILD_NUMBER}\\"
@@ -10,67 +19,67 @@ pipeline {
     stages {
         stage('Restore nuget packages') {
             steps {
-                echo "Starting Restore nuget packages"
+                echo "\u001B[34m=== Starting Restore nuget packages ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet restore'
                 }
-                echo "Finishing Restore nuget packages"
+                echo "\u001B[34m=== Finishing Restore nuget packages ===\u001B[0m"
             }
         }
         stage('Clean FullSolution') {
             steps {
-                echo "Starting Clean FullSolution"
+                echo "\u001B[34m=== Starting Clean FullSolution ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet clean'
                 }
-                echo "Finishing Clean FullSolution"
+                echo "\u001B[34m=== Finishing Clean FullSolution ===\u001B[0m"
             }
         }
         stage('Build FullSolution') {
             steps {
-                echo "Starting Build FullSolution"
+                echo "\u001B[34m=== Starting Build FullSolution ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet build'
                 }
-                echo "Finishing Build FullSolution"
+                echo "\u001B[34m=== Finishing Build FullSolution ===\u001B[0m"
             }
         }
 
         stage('Test FullSolution') {
             steps {
-                echo "Starting Test FullSolution"
+                echo "\u001B[34m=== Starting Test FullSolution ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet test --no-build --verbosity normal'
                 }
-                echo "Finishing Test FullSolution"
+                echo "\u001B[34m=== Finishing Test FullSolution ===\u001B[0m"
             }
         }
 
         stage('Deploy AdminSolution') {
             steps {
-                echo "Starting Deploy AdminSolution"
+                echo "\u001B[34m=== Starting Deploy AdminSolution ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}/AdminSolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}\\AdminSolution\""
                 }
-                echo "Finishing Deploy AdminSolution"
+                echo "\u001B[34m=== Finishing Deploy AdminSolution ===\u001B[0m"
             }
         }
         stage('Deploy MainSolution') {
             steps {
-                echo "Starting Deploy MainSolution"
+                echo "\u001B[34m=== Starting Deploy MainSolution ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}/MainSolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}MainSolution\""
                 }
-                echo "Finishing Deploy MainSolution"
+                echo "\u001B[34m=== Finishing Deploy MainSolution ===\u001B[0m"
             }
         }
         stage('Deploy SecuritySolution') {
             steps {
-                echo "Starting Deploy SecuritySolution"
+                echo "\u001B[34m=== Starting Deploy SecuritySolution ===\u001B[0m"
                 dir("${env.SOLUTION_DIR}/SecuritySolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}SecuritySolution\""
                 }
-                echo "Finishing Deploy SecuritySolution"
+                echo "\u001B[34m=== Finishing Deploy SecuritySolution ===\u001B[0m"
             }
         }
     }
