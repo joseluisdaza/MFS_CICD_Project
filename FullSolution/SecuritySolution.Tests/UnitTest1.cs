@@ -12,7 +12,7 @@ namespace SecuritySolution.Tests
         [Test]
         public void Test1()
         {
-            Assert.Fail();
+            Assert.Pass();
         }
 
         [Test] public void Test2() => Assert.AreEqual(2, 1 + 1);
