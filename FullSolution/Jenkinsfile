@@ -50,12 +50,13 @@ pipeline {
                 }
             }
         }
-        stage('Test AdminSolution') {
+        stage('Test SecuritySolution') {
             steps {
                 dir("${env.SOLUTION_DIR}/AdminSolution.Tests") {
                     bat 'dotnet test --no-build --verbosity normal'
                 }
             }
         }
+      }
     }
 }
