@@ -39,7 +39,7 @@ pipeline {
         stage('Test AdminSolution') {
             steps {
                 dir("${env.SOLUTION_DIR}/AdminSolution.Tests") {
-                    bat 'dotnet test --no-build --verbosity normal'
+                    bat 'dotnet test'
                 }
             }
         }
