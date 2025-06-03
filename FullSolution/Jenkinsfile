@@ -15,45 +15,38 @@ pipeline {
                 }
             }
         }
-        stage('Build AdminSolution') {
+        stage('Build FullSolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet build'
+                }
+            }
+        }
+        stage('Test FullSolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet test --no-build --verbosity normal'
+                }
+            }
+        }
+        stage('Release AdminSolution') {
             steps {
                 dir("${env.SOLUTION_DIR}/AdminSolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}\\AdminSolution\""
                 }
             }
         }
-        stage('Build MainSolution') {
+        stage('Release MainSolution') {
             steps {
                 dir("${env.SOLUTION_DIR}/MainSolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}MainSolution\""
                 }
             }
         }
-        stage('Build SecuritySolution') {
+        stage('Release SecuritySolution') {
             steps {
                 dir("${env.SOLUTION_DIR}/SecuritySolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}SecuritySolution\""
-                }
-            }
-        }
-        stage('Test AdminSolution') {
-            steps {
-                dir("${env.SOLUTION_DIR}/AdminSolution.Test") {
-                    bat 'dotnet test --no-build --verbosity normal'
-                }
-            }
-        }
-        stage('Test MainSolution') {
-            steps {
-                dir("${env.SOLUTION_DIR}/MainSolution.Tests") {
-                    bat 'dotnet test --no-build --verbosity normal'
-                }
-            }
-        }
-        stage('Test SecuritySolution') {
-            steps {
-                dir("${env.SOLUTION_DIR}/AdminSolution.Tests") {
-                    bat 'dotnet test --no-build --verbosity normal'
                 }
             }
         }

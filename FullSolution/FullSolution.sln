@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminSolution", "AdminSolut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecuritySolution", "SecuritySolution\SecuritySolution.csproj", "{4663C627-7066-455F-8824-70C430730ED3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminSolution.Tests", "AdminSolution.Test\AdminSolution.Tests.csproj", "{00E1C58A-47A5-49F7-BC33-2C6A3AC43B3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminSolution.Tests", "AdminSolution.Tests\AdminSolution.Tests.csproj", "{00E1C58A-47A5-49F7-BC33-2C6A3AC43B3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainSolution.Tests", "MainSolution.Tests\MainSolution.Tests.csproj", "{F4D6B924-4105-4007-BA0D-03AE84C90C5E}"
 EndProject
