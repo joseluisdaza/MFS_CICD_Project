@@ -8,51 +8,69 @@ pipeline {
     }
 
     stages {
-        stage('Restore') {
+        stage('Restore nuget packages') {
             steps {
+                echo "Starting Restore nuget packages"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet restore'
                 }
+                echo "Finishing Restore nuget packages"
+            }
+        }
+        stage('Clean FullSolution') {
+            steps {
+                echo "Starting Clean FullSolution"
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet clean'
+                }
+                echo "Finishing Clean FullSolution"
             }
         }
         stage('Build FullSolution') {
             steps {
+                echo "Starting Build FullSolution"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet build'
                 }
+                echo "Finishing Build FullSolution"
             }
         }
+
         stage('Test FullSolution') {
             steps {
+                echo "Starting Test FullSolution"
                 dir("${env.SOLUTION_DIR}") {
                     bat 'dotnet test --no-build --verbosity normal'
                 }
+                echo "Finishing Test FullSolution"
             }
         }
-        stage('Release AdminSolution') {
+
+        stage('Deploy AdminSolution') {
             steps {
+                echo "Starting Deploy AdminSolution"
                 dir("${env.SOLUTION_DIR}/AdminSolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}\\AdminSolution\""
                 }
+                echo "Finishing Deploy AdminSolution"
             }
         }
-        stage('Release MainSolution') {
+        stage('Deploy MainSolution') {
             steps {
+                echo "Starting Deploy MainSolution"
                 dir("${env.SOLUTION_DIR}/MainSolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}MainSolution\""
                 }
+                echo "Finishing Deploy MainSolution"
             }
         }
-        stage('Release SecuritySolution') {
+        stage('Deploy SecuritySolution') {
             steps {
+                echo "Starting Deploy SecuritySolution"
                 dir("${env.SOLUTION_DIR}/SecuritySolution") {
                     bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}SecuritySolution\""
                 }
-            }
-        }
-        stage('Run MainSolution') {
-            steps {
-                bat "\"${env.OUTPUT_DIR}MainSolution\\MainSolution.exe\""
+                echo "Finishing Deploy SecuritySolution"
             }
         }
     }
