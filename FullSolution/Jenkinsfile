@@ -1,0 +1,41 @@
+// Jenkinsfile
+pipeline {
+    agent any
+
+    environment {
+        SOLUTION_DIR = 'FullSolution'
+        OUTPUT_DIR = '\\\\localhost\\Cursos\\Maestria Fullstack\\04 CI CD\\MFS_CICD_Project\\'
+        // OUTPUT_DIR = 'd:\\BackupC\\Personal\\Code\\Masterado\\CI_CD\\'
+    }
+
+    stages {
+        stage('Restore') {
+            steps {
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet restore'
+                }
+            }
+        }
+        stage('Build AdminSolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}/AdminSolution") {
+                    bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}AdminSolution\""
+                }
+            }
+        }
+        stage('Build MainSolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}/MainSolution") {
+                    bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}MainSolution\""
+                }
+            }
+        }
+        stage('Build SecuritySolution') {
+            steps {
+                dir("${env.SOLUTION_DIR}/SecuritySolution") {
+                    bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}SecuritySolution\""
+                }
+            }
+        }
+    }
+}
