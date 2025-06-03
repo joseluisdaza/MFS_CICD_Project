@@ -4,8 +4,7 @@ pipeline {
 
     environment {
         SOLUTION_DIR = 'FullSolution'
-        OUTPUT_DIR = '\\\\localhost\\Cursos\\Maestria Fullstack\\04 CI CD\\MFS_CICD_Project\\'
-        // OUTPUT_DIR = 'd:\\BackupC\\Personal\\Code\\Masterado\\CI_CD\\'
+        OUTPUT_DIR = "\\\\localhost\\Cursos\\Maestria Fullstack\\04 CI CD\\Builds\\${BUILD_NUMBER}\\"
     }
 
     stages {
@@ -19,7 +18,7 @@ pipeline {
         stage('Build AdminSolution') {
             steps {
                 dir("${env.SOLUTION_DIR}/AdminSolution") {
-                    bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}AdminSolution\""
+                    bat "dotnet publish -c Release -o \"${env.OUTPUT_DIR}\\AdminSolution\""
                 }
             }
         }
