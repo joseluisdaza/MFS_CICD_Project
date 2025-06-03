@@ -23,7 +23,6 @@ namespace MainSolution
     public MainWindow()
     {
       InitializeComponent();
-      this is AnchoredBlock error;
     }
   }
 }
