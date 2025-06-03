@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Test AdminSolution') {
             steps {
-                dir("${env.SOLUTION_DIR}/AdminSolution.Tests") {
+                dir("${env.SOLUTION_DIR}/AdminSolution.Test") {
                     bat 'dotnet test'
                 }
             }
