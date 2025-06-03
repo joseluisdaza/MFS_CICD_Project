@@ -50,5 +50,10 @@ pipeline {
                 }
             }
         }
+        stage('Run MainSolution') {
+            steps {
+                bat "\"${env.OUTPUT_DIR}MainSolution\\MainSolution.exe\""
+            }
+        }
     }
   }
