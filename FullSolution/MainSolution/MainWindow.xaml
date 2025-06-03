@@ -5,23 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainSolution"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        Height="450"
+        Width="800">
     <Grid Background="Aquamarine">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0">Main App</Label>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
-            <Button Width="50" Margin="10">Boton 1</Button>
-            <Button Width="50" Margin="10">Boton 2</Button>
-            <Button Width="50" Margin="10">Boton 3</Button>
+        <Label Grid.Row="0"
+               Grid.Column="0">Main App</Label>
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+            
+            <Button Width="50"
+                    Margin="10" 
+                    Background="LightYellow">Boton 1</Button>
+            <Button Width="50"
+                    Margin="10"
+                    Background="LightYellow">Boton 2</Button>
+            <Button Width="50"
+                    Margin="10"
+                    Background="LightGreen">Boton 3</Button>
         </StackPanel>
-        <Label Grid.Row="1" Grid.Column="1" FontSize="25">MAIN APP CONTENT PANEL</Label>
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               FontSize="25">MAIN APP CONTENT PANEL</Label>
     </Grid>
 </Window>

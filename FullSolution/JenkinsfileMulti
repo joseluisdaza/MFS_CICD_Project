@@ -1,0 +1,57 @@
+// Jenkinsfile
+pipeline {
+    agent any
+
+    options {
+        // Timeout after 10 minutes
+        timeout(time: 10, unit: 'MINUTES')
+        // Disable concurrent builds
+        disableConcurrentBuilds()
+        // Adding color to console output
+        ansiColor('xterm')
+    }
+
+    environment {
+        SOLUTION_DIR = 'FullSolution'
+    }
+
+    stages {
+        stage('Restore nuget packages') {
+            steps {
+                echo "\u001B[34m=== Starting Restore nuget packages ===\u001B[0m"
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet restore'
+                }
+                echo "\u001B[34m=== Finishing Restore nuget packages ===\u001B[0m"
+            }
+        }
+        stage('Clean FullSolution') {
+            steps {
+                echo "\u001B[34m=== Starting Clean FullSolution ===\u001B[0m"
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet clean'
+                }
+                echo "\u001B[34m=== Finishing Clean FullSolution ===\u001B[0m"
+            }
+        }
+        stage('Build FullSolution') {
+            steps {
+                echo "\u001B[34m=== Starting Build FullSolution ===\u001B[0m"
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet build'
+                }
+                echo "\u001B[34m=== Finishing Build FullSolution ===\u001B[0m"
+            }
+        }
+
+        stage('Test FullSolution') {
+            steps {
+                echo "\u001B[34m=== Starting Test FullSolution ===\u001B[0m"
+                dir("${env.SOLUTION_DIR}") {
+                    bat 'dotnet test --no-build --verbosity normal'
+                }
+                echo "\u001B[34m=== Finishing Test FullSolution ===\u001B[0m"
+            }
+        }
+    }
+  }
